@@ -1,0 +1,17 @@
+<table class="row-border hover">
+  <thead>
+    <tr>
+      <th>Header 1</th>
+      <th>Header 2</th>
+      <th>Header 3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let row of rows">
+      <th>{{ row.headerName }}</th>
+      <td>{{ row.id }}</td>
+      <td>{{ row.firstName }}</td>
+      <td>{{ row.lastName }}</td>
+    </tr>
+  </tbody>
+</table>
