@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Row } from 'src/models/row.interface';
 
-import 'rxjs/add/operator/map';
-import { HolidayData } from '../../models/holiday_data.interface';
+import { MOCK_TABLE } from '../../mock_data/mock-data';
+import { HolidayData } from '../../models/holiday-data.interface';
 
 @Component({
   selector: 'holiday-table',
@@ -10,12 +11,21 @@ import { HolidayData } from '../../models/holiday_data.interface';
 export class HolidayTableComponent implements OnInit {
 
   tOptions = {};
-  holidayData: HolidayData[] = [];
+  private holidayData: HolidayData = MOCK_TABLE;
+  public columnHeaders: string[]; 
+  public rowHeaders: string[];
+  public rows: Row[] = [];
 
   constructor() { }
 
   ngOnInit(): void {
-    
+    this.columnHeaders = this.holidayData.dimensionResults[0].headerDescriptions.split('\t');
+    this.rowHeaders = this.holidayData.dimensionResults[1].headerDescriptions.split('\t');
+    const returnedRows = this.holidayData.measureResults[0].rows.map(row => row.split('\t'));
+    for (let i = 1; i < returnedRows.length; i++) {
+      this.rows.push({rowHeader: this.rowHeaders[i], rowData: returnedRows[i]})
+    }
+    console.log(this.rows);
   }
 
 }

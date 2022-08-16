@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HolidayTableComponent } from 'src/components/holiday-table/holiday-table.component';
 
 import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HolidayTableComponent
   ],
   imports: [
     BrowserModule
