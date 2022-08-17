@@ -1,27 +1,17 @@
-# AptecoCodeChallengeCm
+Teal Green Holidays Code Exercise
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.9.
+This project consists of one webpage to display a table to the user indicating people who have been on holiday for a particular year. The data is mock data based on data produced via the Apteco github details.
 
-## Development server
+In order to run the application, please run the command 'ng serve'
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Initial implementation in previous commits (before the commit where I changed the README) was to make an initial page (utilising Angular creation of applications and components) and display a table with the relevant data (styling was not a priority).
+Further commits and their reasons will be listed below:
+- Page initial styling, removal of unnecessary Angular code and table styling
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Problems:
+- Formatting the data within the table (i.e. within HTML) - done using string split() and ngFor statements, may need to rework this if this causes issues with sorting or filtering
+- Removing the ! from TOTAL - 
+- Sorting the data
+- Filtering the data
+With the two previous I will use dropdowns in order to save further time
+Note: Since I need credentials in order to contact API, I have decided to focus on the other two (if I get more time after correspondence I could work on this as well)
