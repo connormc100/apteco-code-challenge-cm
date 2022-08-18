@@ -60,3 +60,16 @@ p {
   height: 1000px;
 }
 
+.filter-panel {
+  border-style: solid;
+  border-radius: 5px;
+  min-height: 100px;
+  min-width: 200px;
+  margin-top: 25px;
+}
+
+.panel-heading {
+  border-bottom-style:groove;
+  background-color: teal;
+  color: yellow;
+}

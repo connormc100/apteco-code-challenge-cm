@@ -15,6 +15,14 @@ th {
 
 td {
   width:0.1%;
-  white-space: nowrap;
   border-style: solid;
+}
+
+.row-sort {
+  white-space: nowrap;
+}
+
+.column-sort {
+  font-size: smaller;
+  font-weight: bold;
 }

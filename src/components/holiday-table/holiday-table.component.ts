@@ -16,17 +16,66 @@ export class HolidayTableComponent implements OnInit {
   public columnHeaders: string[]; 
   public rowHeaders: string[];
   public rows: Row[] = [];
+  private fullRows: string[][];
+  private currentRowSort: string;
+  private currentColSort: string;
+
 
   constructor() { }
 
   ngOnInit(): void {
     this.columnHeaders = this.holidayData.dimensionResults[0].headerDescriptions.replace('iTOTAL', 'Total').split('\t');
+    this.fullRows = this.holidayData.measureResults[0].rows.map(row => row.split('\t'));
     this.rowHeaders = this.holidayData.dimensionResults[1].headerDescriptions.replace('iTOTAL', 'Total').split('\t');
-    const returnedRows = this.holidayData.measureResults[0].rows.map(row => row.split('\t'));
-    for (let i = 1; i < returnedRows.length; i++) {
-      this.rows.push({rowHeader: this.rowHeaders[i], rowData: returnedRows[i]})
+    for (let i = 0; i < this.rowHeaders.length; i++) {
+      this.rows.push({rowHeader: this.rowHeaders[i], rowData: this.fullRows[i]});
     }
-    console.log(this.rows);
+  }
+
+  public onRowSortHandler(index: string): void {
+    this.fullRows.unshift(this.columnHeaders);
+    let columns = this.fullRows[0].map((_, colIndex) => this.fullRows.map(row => row[colIndex]));
+    
+    if (this.currentColSort === index) {
+      columns = columns.sort(function(a,b){return parseInt(a[index+1]) < parseInt(b[index+1]) ? 1 : -1; });
+      this.currentColSort = null;
+    } else {
+      columns = columns.sort(function(a,b){return parseInt(a[index+1]) > parseInt(b[index+1]) ? 1 : -1; });
+      this.currentColSort = index;
+    }
+    this.rows = [];
+    this.columnHeaders = [];
+    for (let i = 0; i < columns.length; i++) {
+      //const rowHeader = this.fullRows[i][0];
+      this.columnHeaders.push(columns[i][0]);
+    }
+    this.fullRows = columns[0].map((_, colIndex) => columns.map(row => row[colIndex]));
+    this.fullRows.shift();
+    for (let i = 0; i < this.fullRows.length; i++) {
+      //const rowHeader = this.fullRows[i][0];
+      this.rows.push({rowHeader: this.rowHeaders[i], rowData: this.fullRows[i]});
+    }
+  }
+
+  public onColumnSortHandler(index: string): void {
+    for (let i = 0; i < this.rowHeaders.length; i++) {
+      this.fullRows[i].unshift(this.rowHeaders[i]);
+    }
+    if (this.currentRowSort === index) {
+      this.fullRows = this.fullRows.sort(function(a,b){return parseInt(a[index+1]) < parseInt(b[index+1]) ? 1 : -1; });
+      this.currentRowSort = null;
+    } else {
+      this.fullRows = this.fullRows.sort(function(a,b){return parseInt(a[index+1]) > parseInt(b[index+1]) ? 1 : -1; });
+      this.currentRowSort = index;
+    }
+    this.rows = [];
+    this.rowHeaders = [];
+    for (let i = 0; i < this.fullRows.length; i++) {
+      //const rowHeader = this.fullRows[i][0];
+      this.rows.push({rowHeader: this.fullRows[i][0], rowData: this.fullRows[i]});
+      this.rowHeaders.push(this.fullRows[i][0]);
+      this.fullRows[i].shift();
+    }
   }
 
 }

@@ -2,13 +2,19 @@
   <thead>
     <tr>
       <th></th>
-      <th *ngFor="let header of columnHeaders">{{ header }}</th>
+      <th *ngFor="let header of columnHeaders; let i = index"><button class="column-sort"
+        type="button"
+        [id]="'sort_by_h' + i"
+        (click)="onColumnSortHandler(i)" >{{ header }}</button></th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let row of rows">
-      <th> {{ row.rowHeader }} </th>
-      <ng-container *ngFor="let r of row.rowData">
+    <tr *ngFor="let row of rows; let i = index">
+      <th><button class="row-sort"
+        type="button"
+        [id]="'sort_by_' + i"
+        (click)="onRowSortHandler(i)" >{{ row.rowHeader }}</button></th>
+      <ng-container *ngFor="let r of row.rowData; let j = index">
       <td>{{ r }}</td>
     </ng-container>
     </tr>
