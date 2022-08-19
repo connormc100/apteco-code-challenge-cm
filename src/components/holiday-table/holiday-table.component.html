@@ -1,3 +1,6 @@
+<div class="reset-wrapper">
+  <button id="reset-sorting" class="reset-sorting" (click)="resetSorting()">Reset sorting</button>
+</div>
 <table class="holiday-table">
   <thead>
     <tr>
@@ -5,7 +8,8 @@
       <th *ngFor="let header of columnHeaders; let i = index"><button class="column-sort"
         type="button"
         [id]="'sort_by_h' + i"
-        (click)="onColumnSortHandler(i)" >{{ header }}</button></th>
+        (click)="onColumnSortHandler(i, header)" >{{ header }}</button>
+      <label *ngIf="currentColSort === header" class="row-asc">↓</label><label *ngIf="descColSort === header" class="row-desc">↑</label></th>
     </tr>
   </thead>
   <tbody>
@@ -13,7 +17,8 @@
       <th><button class="row-sort"
         type="button"
         [id]="'sort_by_' + i"
-        (click)="onRowSortHandler(i)" >{{ row.rowHeader }}</button></th>
+        (click)="onRowSortHandler(i, row.rowHeader)" >{{ row.rowHeader }}</button>
+        <label *ngIf="currentRowSort === row.rowHeader" class="row-asc">→</label><label *ngIf="descRowSort === row.rowHeader" class="row-desc">←</label></th>
       <ng-container *ngFor="let r of row.rowData; let j = index">
       <td>{{ r }}</td>
     </ng-container>

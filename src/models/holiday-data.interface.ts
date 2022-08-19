@@ -1,6 +1,6 @@
-import { Count } from "./count.interface";
-import { Dimension } from "./dimension.interface";
-import { Measure } from "./measure.interface";
+import { Count } from './count.interface';
+import { Dimension } from './dimension.interface';
+import { Measure } from './measure.interface';
 
 export interface HolidayData {
   // created objects for relevant data groupings
